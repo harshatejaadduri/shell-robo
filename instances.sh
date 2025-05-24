@@ -9,9 +9,9 @@ DOMAIN_NAME="84dev.store"
 for instance in ${Instance[@]}
 
 do
-ipadd=$(aws ec2 run-instances \
---image-id $AMI_ID \
---instance-type t2.micro \
+ipadd=$(aws ec2 run-instances \ 
+--image-id $AMI_ID \ 
+--instance-type t2.micro \ 
 --security-group-ids $SG_ID \
 --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value= $instance }]'\
 --query "Reservations[*].Instances[*].PrivateIpAddress" \
