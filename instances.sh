@@ -17,7 +17,7 @@ ipadd=$(aws ec2 run-instances \
 --query "Reservations[*].Instances[*].PrivateIpAddress" \
 --output text)
 
-if [ instance != "frontend" ]
+if [ $instance != "frontend" ]
 then
   IP=$(aws ec2 describe-instances \
     --instance-ids $ipadd \
