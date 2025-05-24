@@ -9,22 +9,21 @@ DOMAIN_NAME="84dev.store"
 for instance in ${Instance[@]}
 
 do
-ipadd=$(aws ec2 run-instances \
---image-id $AMI_ID \
---instance-type t2.micro \
---security-group-ids $SG_ID \
---tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance }]" \
---query "Instances[*].PrivateIpAddress" \
--output text)
+INSTANCE_ID=$(aws ec2 run-instances \
+    --image-id $AMI_ID \
+    --instance-type t2.micro \
+    --security-group-ids $SG_ID\
+    --query "Instances[0].InstanceId" \
+    --output text)
 if [ $instance != "frontend" ]
 then
   IP=$(aws ec2 describe-instances \
-  --instance-ids $ipadd \
+  --instance-ids $INSTANCE_ID \
   --query "Instances[*].PrivateIpAddress" \
   --output text)
 else
   IP=$(aws ec2 describe-instances \
-  --instance-ids $ipadd \
+  --instance-ids $INSTANCE_ID \
   --query "Instances[*].PublicIpAddress" \
   --output text)
 fi
