@@ -47,7 +47,7 @@ echo "$instance address is : $IP"
             }
         }
     ]
-}
+}'
 
  done
 
