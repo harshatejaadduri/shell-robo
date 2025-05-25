@@ -24,21 +24,29 @@ else
 fi
 echo "$instance address is : $IP"
 
- {
+   aws route53 change-resource-record-sets --hosted-zone-id $ZONE_ID --change-batch 
+{
     "Comment": "Update record to add new CNAME record",
     "Changes": 
-    [{
+    [
+        {
             "Action": "UPSERT",
             "ResourceRecordSet": 
             {
-                "Name": "'$instance'.'$DOMAIN_NAME'",
+                "Name": "$instance'.'$DOMAIN_NAME'",
                 "Type": "A",
                 "TTL": 1,
                 "ResourceRecords": 
-                [{
+                [
+                    {
                         "Value": "$IP"
                     }
-                ]}}
+                ]
+            }
+        }
     ]
-    }
+}
  done
+
+
+
