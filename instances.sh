@@ -23,10 +23,8 @@ else
   IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
 fi
 echo "$instance address is : $IP"
-done
 
-{
-  "Comment": "optional comment about the changes in this change batch request",
+"Comment": "optional comment about the changes in this change batch request",
   "Changes": [
     {
       "Action": "UPSERT",
@@ -43,5 +41,5 @@ done
       }
     }
   ]
-}
 
+done
