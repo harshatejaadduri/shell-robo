@@ -37,20 +37,20 @@ else
 fi 
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-VALID $? "Copying repos"
+dnf module disable redis -y
+VALID $? "Disabling older redis"
 
-dnf install mongodb-org -y  &>>$log_file
-VALID $? "Installing mongodb"
+dnf module enable redis:7 -y
+VALID $? "Enabling redis version 7"
 
-systemctl enable mongod &>>$log_file
-VALID $? "Enabling mongodb"
+dnf install redis -y  &>>$log_file
+VALID $? "Installing redis"
 
-systemctl start mongod &>>$log_file
-VALID $? "Starting mongodb"
-
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>>$log_file
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf &>>$log_file
 VALID $? "Substitiuting localhost for remote connections"
 
-systemctl restart mongod &>>$log_file
-VALID $? "Restarting mongodb"
+systemctl enable redis &>>$log_file
+VALID $? "Enabling redis"
+
+systemctl start redis &>>$log_file
+VALID $? "Starting redis"
