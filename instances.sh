@@ -23,23 +23,32 @@ else
   IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
 fi
 echo "$instance address is : $IP"
-
-"Comment": "optional comment about the changes in this change batch request",
-  "Changes": [
+{
+  "Comment": "optional comment about the changes in this change batch request",
+  "Changes": 
+  [
     {
-      "Action": "UPSERT",
-      "ResourceRecordSet": {
-        "Name": "'$instance'.'$DOMAIN_NAME'",
-        "Type": "A",
-        "TTL":1,
-        "ResourceRecords": [
-          {
-            "Value": "$IP"
-          }
-          
-        ]
-      }
+    "Comment": "Update record to add new CNAME record",
+    "Changes": 
+    [
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": 
+            {
+                "Name": "'$instance'.'$DOMAIN_NAME'",
+                "Type": "A",
+                "TTL": 1,
+                "ResourceRecords": 
+                [
+                    {
+                        "Value": "$IP"
+                    }
+                ]
+            }
+        }
+    ]
     }
   ]
+} 
 
 done
