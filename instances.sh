@@ -43,10 +43,11 @@ echo "$instance address is : $IP"
                     {
                         "Value": "'$IP'"
                     }
-                ],
-            },
+                ]
+            }
         }
-    ],
+    ]
 }
+
  done
 
