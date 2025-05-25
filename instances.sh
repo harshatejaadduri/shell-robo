@@ -25,5 +25,23 @@ fi
 echo "$instance address is : $IP"
 done
 
-
+{
+  "Comment": "optional comment about the changes in this change batch request",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "'$instance'.'$DOMAIN_NAME'",
+        "Type": "A",
+        "TTL":1,
+        "ResourceRecords": [
+          {
+            "Value": "$IP"
+          }
+          
+        ]
+      }
+    }
+  ]
+}
 
