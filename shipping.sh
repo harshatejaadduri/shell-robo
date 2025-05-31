@@ -53,40 +53,40 @@ VALID $? "Adding User"
 mkdir --p /app  &>>$log_file
 VALID $? "Creating Directory"
 
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
 VALID $? "Downloading Zipfile"
 
 cd /app 
-unzip /tmp/shipping.zip
+unzip /tmp/shipping.zip &>>$log_file
 VALID $? "Unzipping Zipfile"
 
 mvn clean package 
-mv target/shipping-1.0.jar shipping.jar
+mv target/shipping-1.0.jar shipping.jar &>>$log_file
 VALID $? "Downloading dependencies"
 
-cp shipping.service /etc/systemd/system/shipping.service
+cp shipping.service /etc/systemd/system/shipping.service &>>$log_file
 VALID $? "Coping service"
 
-systemctl daemon-reload
+systemctl daemon-reload 
 VALID $? "Service reloading"
 
-systemctl enable shipping 
-systemctl start shipping
+systemctl enable shipping  &>>$log_file
+systemctl start shipping &>>$log_file
 VALID $? "Enabling and starting shipping"
 
-
-dnf install mysql -y 
+ 
+dnf install mysql -y  &>>$log_file
 VALID $? "Installing mysql"
 
 
-mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/schema.sql
+mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/schema.sql &>>$log_file
 VALID $? "Loading schema to IP"
 
-mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/app-user.sql 
+mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$log_file
 VALID $? "Loading userdata to IP"
 
-mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h mysql.84dev.store -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$log_file
 VALID $? "Loading MasterData to IP"
 
-systemctl restart shipping
+systemctl restart shipping &>>$log_file
 VALID $? "Restarting Shipping"

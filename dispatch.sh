@@ -38,33 +38,33 @@ else
 fi 
 }
 
-dnf install golang -y
-VALID "$?" "Installing Go Language"
+dnf install golang -y &>>$log_file
+VALID $? "Installing Go Language"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-VALID "$?" "Installing Go Language"
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
+VALID $? "Installing Go Language"
 
-mkdir /app 
-VALID "$?" "Creating app directory"
+mkdir /app &>>$log_file
+VALID $? "Creating app directory"
 
-curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip 
-VALID "$?" "Downloading zip files"
+curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip &>>$log_file
+VALID $? "Downloading zip files" 
 
 cd /app 
-unzip /tmp/dispatch.zip
-VALID "$?" "Unzipping the files in app directory"
+unzip /tmp/dispatch.zip &>>$log_file
+VALID $? "Unzipping the files in app directory"
 
-go mod init dispatch
-go get 
-go build
-VALID "$?" "Loading Dependencies"
+go mod init dispatch &>>$log_file
+go get  &>>$log_file
+go build &>>$log_file
+VALID $? "Loading Dependencies"
 
-cp dispatch.service /etc/systemd/system/dispatch.service
-VALID "$?" "Copying service files"
+cp dispatch.service /etc/systemd/system/dispatch.service &>>$log_file
+VALID $? "Copying service files"
 
-systemctl daemon-reload
-VALID "$?" "Reloading"
+systemctl daemon-reload &>>$log_file
+VALID $? "Reloading"
 
-systemctl enable dispatch 
-systemctl start dispatch
-VALID "$?" "Enabling and Starting Dispatch Service"
+systemctl enable dispatch  &>>$log_file
+systemctl start dispatch &>>$log_file
+VALID $? "Enabling and Starting Dispatch Service"

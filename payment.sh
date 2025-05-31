@@ -38,30 +38,31 @@ else
 fi 
 }
 
-dnf install python3 gcc python3-devel -y
-VALID "$?" "Installing python"
+dnf install python3 gcc python3-devel -y &>>$log_file
+VALID $? "Installing python"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-VALID "$?" "Installing python"
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
+VALID $? "Installing python"
 
-mkdir /app 
-VALID "$?" "Creating app directory"
+mkdir /app  &>>$log_file
+VALID $? "Creating app directory"
 
-curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
-VALID "$?" "Downloading Zipfile "
+curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip  &>>$log_file
+VALID $? "Downloading Zipfile "
 
 cd /app 
-unzip /tmp/payment.zip
-VALID "$?" "Unzipping"
+unzip /tmp/payment.zip &>>$log_file
+VALID $? "Unzipping"
  
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt &>>$log_file
 
-cp payment.service /etc/systemd/system/payment.service
-VALID "$?" "Copying payment.service"
+cp payment.service /etc/systemd/system/payment.service &>>$log_file
+VALID $? "Copying payment.service"
 
 systemctl daemon-reload
-VALID "$?" "Reloading"
+VALID $? "Reloading"
 
-systemctl enable payment 
-systemctl start payment
-VALID "$?" "Enabling and Starting Payment service"
+systemctl enable payment &>>$log_file
+systemctl start payment &>>$log_file
+VALID $? "Enabling and Starting Payment service"
+

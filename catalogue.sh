@@ -84,9 +84,6 @@ VALID $? "copying mongo repos"
 dnf install mongodb-mongosh -y &>>$log_file
 VALID $? "Installing Mongo Client"
 
-
-
-
 STATUS=$(mongosh --host mongodb.daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $STATUS -lt 0 ]
 then
