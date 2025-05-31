@@ -63,7 +63,7 @@ unzip /tmp/frontend.zip
 VALID $? "Loading Roboshop content"
 
 rm -rf /etc/nginx/nginx.conf &>>$log_file
-VALIDATE $? "Remove default nginx conf"
+VALID $? "Remove default nginx conf"
 
 cp $pwd/nginx.conf /etc/nginx/nginx.conf
 VALID $? "Copying Configrations"
