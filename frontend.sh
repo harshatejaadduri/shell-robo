@@ -47,9 +47,11 @@ dnf install nginx -y  &>>$log_file
 VALID $? "Installing nginx"
 
 systemctl enable nginx  &>>$log_file 
-
 systemctl start nginx &>>$log_file 
 VALID $? "Starting nginx"
+
+rm -rf /usr/share/nginx/html/* 
+VALID $? "Removing default content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
 VALID $? "Enabling nginx"
@@ -58,8 +60,8 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 VALID $? "Loading Roboshop content"
 
-rm -rf /usr/share/nginx/html/* 
-VALID $? "Removing default content"
+rm -rf /etc/nginx/nginx.conf &>>$log_file
+VALIDATE $? "Remove default nginx conf"
 
 cp $pwd/nginx.conf /etc/nginx/nginx.conf
 VALID $? "Copying Configrations"
