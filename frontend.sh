@@ -49,14 +49,14 @@ VALID $? "Installing nginx"
 systemctl enable nginx  &>>$log_file 
 VALID $? "Enabling nginx"
 
-systemctl start nginx  &>>$log_file 
+systemctl start nginx  
 VALID $? "Starting nginx"
 
 rm -rf /usr/share/nginx/html/* 
 VALID $? "Removing default content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
-VALID $? "Enabling nginx"
+VALID $? "Downloading nginx"
 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
