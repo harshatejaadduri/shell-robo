@@ -11,7 +11,7 @@ N="\e[0m"
 logs_folder="/var/log/roboshop"
 script_name=$(echo $0 | cut -d "." -f1) 
 log_file="$logs_folder/$script_name.log"
-
+pwd=$PWD
 mkdir -p $logs_folder
 
 
@@ -62,8 +62,8 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 VALID $? "Loading Roboshop content"
 
-cp nginx.conf /etc/nginx/nginx.conf
-VALID $? "Enabling nginx"
+cp $pwd/nginx.conf /etc/nginx/nginx.conf
+VALID $? "Copying Configrations"
 
 systemctl restart nginx &>>$log_file
 VALID $? "Restarting nginx"
