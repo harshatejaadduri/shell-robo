@@ -11,18 +11,18 @@ N="\e[0m"
 logs_folder="/var/log/roboshop"
 script_name=$(echo $0 | cut -d "." -f1) 
 log_file="$logs_folder/$script_name.log"
+
 pwd=$PWD
+
 mkdir -p $logs_folder
-
-
 
 #checks user id
 if [ $USERID -eq 0 ]
 
 then 
-   echo -e "$G User has root access " | tee -a &log_file
+   echo -e "$G User has root access " | tee -a $log_file
 else
-   echo -e "$R User doesn't have root access " | tee -a &log_file
+   echo -e "$R User doesn't have root access " | tee -a $log_file
    exit 1
 fi
 
@@ -30,9 +30,9 @@ fi
 VALID() {
 if [ $1 -eq 0 ]
 then
-    echo -e "$N $2 is ....$G Successful" | tee -a &log_file
+    echo -e "$N $2 is ....$G Successful" | tee -a $log_file
 else
-    echo -e "$N $2 is ....$R Failure" | tee -a &log_file
+    echo -e "$N $2 is ....$R Failure" | tee -a $log_file
     exit 1
 fi 
 }
@@ -43,13 +43,12 @@ VALID $? "Disabling nginx"
 dnf module enable nginx:1.24 -y &>>$log_file
 VALID $? "Enabling nginx version 1.24"
 
-dnf install nginx -y  &>>$log_file &>>$log_file
+dnf install nginx -y  &>>$log_file 
 VALID $? "Installing nginx"
 
-systemctl enable nginx  &>>$log_file &>>$log_file
-VALID $? "Enabling nginx"
+systemctl enable nginx  &>>$log_file 
 
-systemctl start nginx &>>$log_file &>>$log_file
+systemctl start nginx &>>$log_file 
 VALID $? "Starting nginx"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
