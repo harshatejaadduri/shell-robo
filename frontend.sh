@@ -54,12 +54,12 @@ VALID $? "Starting nginx"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
 VALID $? "Enabling nginx"
 
-rm -rf /usr/share/nginx/html/* 
-VALID $? "Removing default content"
-
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
 VALID $? "Loading Roboshop content"
+
+rm -rf /usr/share/nginx/html/* 
+VALID $? "Removing default content"
 
 cp $pwd/nginx.conf /etc/nginx/nginx.conf
 VALID $? "Copying Configrations"
