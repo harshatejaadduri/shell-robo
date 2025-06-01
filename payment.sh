@@ -56,7 +56,7 @@ VALID $? "Unzipping"
  
 pip3 install -r requirements.txt &>>$log_file
 
-cp payment.service /etc/systemd/system/payment.service &>>$log_file
+cp $pwd/payment.service /etc/systemd/system/payment.service &>>$log_file
 VALID $? "Copying payment.service"
 
 systemctl daemon-reload
