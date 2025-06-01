@@ -41,8 +41,14 @@ fi
 dnf install python3 gcc python3-devel -y &>>$log_file
 VALID $? "Installing python"
 
+id roboshop
+if [$? -ne 0]
+then 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
-VALID $? "Installing python"
+else 
+echo "User already exists"
+fi
+VALID $? "Adding User" 
 
 mkdir /app  &>>$log_file
 VALID $? "Creating app directory"
