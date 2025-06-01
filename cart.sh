@@ -68,7 +68,7 @@ unzip /tmp/cart.zip &>>$log_file
 VALID $? "Unzipping into directory" 
 
 npm install &>>$log_file
-VALID $? "Installing nodepackage manager"
+VALID $? "Installing dependencies"
 
 cp $pwd/cart.service /etc/systemd/system/cart.service &>>$log_file
 VALID $? "Copying service"
