@@ -41,8 +41,14 @@ fi
 dnf install golang -y &>>$log_file
 VALID $? "Installing Go Language"
 
+id roboshop
+if [$? -ne 0]
+then 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
-VALID $? "Installing Go Language"
+else 
+echo "User already exists"
+fi
+VALID $? "Adding User" 
 
 mkdir /app &>>$log_file
 VALID $? "Creating app directory"
