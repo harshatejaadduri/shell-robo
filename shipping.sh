@@ -56,6 +56,7 @@ VALID $? "Creating Directory"
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
 VALID $? "Downloading Zipfile"
 
+rm -rf /app/*
 cd /app 
 unzip /tmp/shipping.zip &>>$log_file
 VALID $? "Unzipping Zipfile"

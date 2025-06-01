@@ -56,6 +56,7 @@ VALID $? "Creating app directory"
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip &>>$log_file
 VALID $? "Downloading zip files" 
 
+rm -rf /app/*
 cd /app 
 unzip /tmp/dispatch.zip &>>$log_file
 VALID $? "Unzipping the files in app directory"
