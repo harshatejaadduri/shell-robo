@@ -65,8 +65,7 @@ VALID $? "Loading Roboshop content"
 rm -rf /etc/nginx/nginx.conf &>>$log_file
 VALID $? "Remove default nginx conf"
 
-cd /etc/nginx/nginx.conf
-cp nginx.conf /etc/nginx/nginx.conf
+cp $pwd/nginx.conf /etc/nginx/nginx.conf
 VALID $? "Copying Configrations"
 
 systemctl restart nginx &>>$log_file
