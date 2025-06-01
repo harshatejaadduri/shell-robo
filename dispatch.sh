@@ -59,7 +59,7 @@ go get  &>>$log_file
 go build &>>$log_file
 VALID $? "Loading Dependencies"
 
-cp dispatch.service /etc/systemd/system/dispatch.service &>>$log_file
+cp $pwd/dispatch.service /etc/systemd/system/dispatch.service &>>$log_file
 VALID $? "Copying service files"
 
 systemctl daemon-reload &>>$log_file
