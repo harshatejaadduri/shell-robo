@@ -42,7 +42,7 @@ dnf install maven -y &>>$log_file &>>$log_file
 VALID $? "Installing maven"
 
 id roboshop
-if [$? -ne 0]
+if [ $? -ne 0 ]
 then 
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$log_file
 else 
@@ -50,7 +50,7 @@ echo "User already exists"
 fi
 VALID $? "Adding User" 
 
-mkdir --p /app  &>>$log_file
+mkdir -p /app  &>>$log_file
 VALID $? "Creating Directory"
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
@@ -64,7 +64,7 @@ mvn clean package
 mv target/shipping-1.0.jar shipping.jar &>>$log_file
 VALID $? "Downloading dependencies"
 
-cp shipping.service /etc/systemd/system/shipping.service &>>$log_file
+cp $pwd/shipping.service /etc/systemd/system/shipping.service &>>$log_file
 VALID $? "Coping service"
 
 systemctl daemon-reload 
