@@ -74,8 +74,11 @@ cp $pwd/cart.service /etc/systemd/system/cart.service &>>$log_file
 VALID $? "Copying service"
 
 systemctl daemon-reload &>>$log_file
+VALID $? "Reloading"
 
 systemctl enable cart  &>>$log_file
+VALID $? "Enabling Cart"
+
 systemctl start cart &>>$log_file
 VALID $? "Starting cart" 
 
