@@ -50,7 +50,7 @@ echo "User already exists"
 fi
 VALID $? "Adding User" 
 
-mkdir /app &>>$log_file
+mkdir -p /app &>>$log_file
 VALID $? "Creating app directory"
 
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip &>>$log_file
