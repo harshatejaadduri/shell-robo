@@ -56,7 +56,7 @@ echo -e "User already exists....$Y Skipping $N"
 fi
 
 
-mkdir --p /app  &>>$log_file
+mkdir -p /app  &>>$log_file
 VALID $? "Creating Directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &>>$log_file
