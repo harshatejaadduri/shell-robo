@@ -56,7 +56,7 @@ echo "User already exists"
 fi
 VALID $? "Adding User" 
 
-mkdir --p /app  &>>$log_file
+mkdir -p /app  &>>$log_file
 VALID $? "Creating Directory"
 
 curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
