@@ -1,0 +1,1 @@
+Basically it is a Robo Market Application which has been developed by the Developers and then documentation was prepared and then as a DevOps Engineer used scripts to Deploy the code into sever and run it as a 3 tier applcation
